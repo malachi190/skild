@@ -19,7 +19,14 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'role',
+        'photo_url',
+        'phone_number',
+        'status',
+        'last_login',
+        'deleted_at',
         'email',
         'password',
     ];
@@ -33,6 +40,17 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function artisan_profile()
+    {
+        return $this->hasOne(ArtisanProfile::class, "user_id");
+    }
+
+    public function customer_profile()
+    {
+        return $this->hasOne(CustomerProfile::class, "user_id");
+    }
+
 
     /**
      * Get the attributes that should be cast.
